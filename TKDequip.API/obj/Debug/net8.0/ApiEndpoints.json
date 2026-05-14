@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "TKDequip.API.Controllers.HealthController",
+    "Method": "Get",
+    "RelativePath": "api/Health/ping",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
