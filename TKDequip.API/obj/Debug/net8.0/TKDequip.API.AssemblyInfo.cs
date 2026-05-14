@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TKDequip.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7fa8790f88e7417186d6961b3f80c962dfd35840")]
 [assembly: System.Reflection.AssemblyProductAttribute("TKDequip.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TKDequip.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,1 +1,21 @@
+# Visual Studio
 .vs/
+*.user
+*.suo
+*.cache
+
+# Build results
+bin/
+obj/
+
+# Debug symbols
+*.pdb
+
+# NuGet (legacy)
+packages/
+
+# Node (если есть frontend)
+node_modules/
+
+# Logs
+*.log
