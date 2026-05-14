@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TKDequipShop.BusinessLogic.Core;
+using TKDequipShop.BusinessLogic.Interfaces;
+using TKDequipShop.Domains.Models.Product;
+
+namespace TKDequipShop.BusinessLogic.Functions
+{
+    public class ProductFlow : ProductActions, IProductActions
+    {
+        public List<ProductResponseDto> GetAllProductsAction()
+        {
+            var products = ExecuteGetAllProductsAction();
+            List<ProductResponseDto> productsDto = new List<ProductResponseDto>();
+
+            foreach (var product in products)
+            {
+                var productRespDto = new ProductResponseDto()
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Description = product.Description,
+                };
+                productsDto.Add(productRespDto);
+
+            }
+            return productsDto;
+        }
+
+        public ProductResponseDto CreateNewProductAction(ProductCreateDto _product)
+        {
+            var newProduct = ExecuteCreateNewProductsAction(_product);
+
+            ProductResponseDto newProductDto = new ProductResponseDto()
+            {
+                Id = newProduct.Id,
+                Name = newProduct.Name,
+                Price = newProduct.Price,
+                Description = newProduct.Description,
+            };
+
+            return newProductDto;
+        }
+    }
+}

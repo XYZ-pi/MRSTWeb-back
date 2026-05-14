@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TKDequipShop.BusinessLogic\TKDequipShop.BusinessLogic.csproj" />
+    <ProjectReference Include="..\TKDequipShop.Domains\TKDequipShop.Domains.csproj" />
+  </ItemGroup>
+
 </Project>
