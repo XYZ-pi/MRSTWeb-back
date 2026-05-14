@@ -12,5 +12,7 @@ namespace TKDequipShop.BusinessLogic.Interfaces
         public List<ProductResponseDto> GetAllProductsAction();
 
         public ProductResponseDto CreateNewProductAction(ProductCreateDto _product);
+
+        public ProductResponseDto UpdateProductAction(int id, ProductCreateDto _product);
     }
 }

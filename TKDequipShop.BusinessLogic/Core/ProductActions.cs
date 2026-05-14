@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TKDequipShop.Domains.Entities.Product;
 using TKDequipShop.Domains.Models.Product;
 
@@ -33,5 +35,20 @@ namespace TKDequipShop.BusinessLogic.Core
 
             return newProduct;
         }
+
+        public ProductData ExecuteUpdateProductAction(int id, ProductCreateDto _product)
+        {
+            var ProductToUpdate = products.FirstOrDefault(p => p.Id == id);
+
+            if (ProductToUpdate == null) return null;
+
+            ProductToUpdate.Name = _product.Name;
+            ProductToUpdate.Description = _product.Description;
+            ProductToUpdate.Price = _product.Price;
+            ProductToUpdate.UpdatedAt = DateTime.Now;
+        
+            return ProductToUpdate;
+        }
+
     }
 }

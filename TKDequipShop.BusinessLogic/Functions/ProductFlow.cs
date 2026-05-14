@@ -45,5 +45,20 @@ namespace TKDequipShop.BusinessLogic.Functions
 
             return newProductDto;
         }
+
+        public ProductResponseDto UpdateProductAction(int id, ProductCreateDto _product)
+        {
+            var updatedProduct = ExecuteUpdateProductAction(id, _product);
+
+            ProductResponseDto updatedProductDto = new ProductResponseDto()
+            {
+                Id = updatedProduct.Id,
+                Name = updatedProduct.Name,
+                Price = updatedProduct.Price,
+                Description = updatedProduct.Description,
+            };
+
+            return updatedProductDto;
+        }
     }
 }
