@@ -45,5 +45,15 @@ namespace TKDequip.API.Controllers
             if (!IsDeleted) return NotFound();
             return NoContent();
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var _product = _productActions.GetByIdProductAction(id);
+
+            if (_product == null) return NotFound();
+
+            return Ok(_product);
+        }
     }
 }

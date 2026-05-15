@@ -66,5 +66,22 @@ namespace TKDequipShop.BusinessLogic.Functions
 
             return ExecuteDeleteProductAction(id);
         }
+
+        public ProductResponseDto GetByIdProductAction(int id)
+        {
+            var foundProduct = ExecuteGetByIdProductAction(id);
+
+            if (foundProduct == null) return null;
+
+            ProductResponseDto foundProductDto = new ProductResponseDto()
+            {
+                Id = foundProduct.Id,
+                Name = foundProduct.Name,
+                Price = foundProduct.Price,
+                Description = foundProduct.Description,
+            };
+
+            return foundProductDto;
+        }
     }
 }

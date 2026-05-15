@@ -59,6 +59,15 @@ namespace TKDequipShop.BusinessLogic.Core
 
             return true;
         }
+
+        public ProductData ExecuteGetByIdProductAction(int id)
+        {
+            var ProductToFound = products.FirstOrDefault(p => p.Id == id);
+
+            if (ProductToFound == null) return null;
+
+            return ProductToFound;
+        }
     }
 
 }
