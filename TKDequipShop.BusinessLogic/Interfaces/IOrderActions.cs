@@ -9,5 +9,7 @@ namespace TKDequipShop.BusinessLogic.Interfaces
 {
     public interface IOrderActions
     {
+        public List<OrderData> GetAllOrdersOfUserAction(int _userId);
+
     }
 }
