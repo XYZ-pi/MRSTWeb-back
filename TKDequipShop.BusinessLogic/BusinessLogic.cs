@@ -20,6 +20,9 @@ namespace TKDequipShop.BusinessLogic
             return new UserFlow();
         }
 
-        
+        public ICartActions GetCartActions()
+        {
+            return new CartFlow();
+        }
     }
 }
