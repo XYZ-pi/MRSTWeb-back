@@ -5,7 +5,7 @@ using TKDequipShop.Domains.Entities.Cart;
 
 namespace TKDequip.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/cart")]
     [ApiController]
     public class CartController : ControllerBase
     {

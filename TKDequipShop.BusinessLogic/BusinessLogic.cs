@@ -24,5 +24,10 @@ namespace TKDequipShop.BusinessLogic
         {
             return new CartFlow();
         }
+
+        public IOrderActions GetOrderActions()
+        {
+            return new OrderFlow();
+        }
     }
 }
