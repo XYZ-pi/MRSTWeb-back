@@ -8,6 +8,8 @@ namespace TKDequipShop.Domains.Enums.User
 {
     public enum GenderTypes
     {
-
+        None = 0,
+        Woman = 1,
+        Man = 2,
     }
 }

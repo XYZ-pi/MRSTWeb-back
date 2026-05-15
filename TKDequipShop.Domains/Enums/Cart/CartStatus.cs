@@ -8,5 +8,9 @@ namespace TKDequipShop.Domains.Enums.Cart
 {
     public enum CartStatus
     {
+        Active = 1,
+        Completed = 2,
+        Abandoned = 3,
+
     }
 }
