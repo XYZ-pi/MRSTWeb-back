@@ -13,5 +13,7 @@ namespace TKDequipShop.BusinessLogic.Interfaces
         public UserResponseDto CreateNewUserAction(UserCreateDto _user);
         public UserResponseDto UpdateUserAction(int id, UserCreateDto _user);
         public bool DeleteUserAction(int id);
+        public UserResponseDto GetUserByIdAction(int id);
+
     }
 }

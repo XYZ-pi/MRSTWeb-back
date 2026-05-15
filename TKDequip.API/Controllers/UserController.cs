@@ -53,5 +53,15 @@ namespace TKDequip.API.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            var _user = _userActions.GetUserByIdAction(id);
+
+            if (_user == null) return NotFound();
+
+            return Ok(_user);
+        }
     }
 }

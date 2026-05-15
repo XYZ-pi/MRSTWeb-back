@@ -63,5 +63,14 @@ namespace TKDequipShop.BusinessLogic.Core
             users.Remove(UserToDelete);
             return true;
         }
+        public UserData ExecuteGetUserByIdAction(int id)
+        {
+            var UserToFound = users.FirstOrDefault(u => u.Id == id);
+
+            if (UserToFound == null) return null;       
+            return UserToFound;
+        }
+
+
     }
 }

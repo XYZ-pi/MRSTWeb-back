@@ -47,7 +47,7 @@ namespace TKDequip.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetProductById(int id)
         {
             var _product = _productActions.GetByIdProductAction(id);
 

@@ -66,6 +66,21 @@ namespace TKDequipShop.BusinessLogic.Functions
 
         }
 
+        public UserResponseDto GetUserByIdAction(int id)
+        {
+            var foundUser = ExecuteGetUserByIdAction(id);
+
+            if (foundUser == null) return null;
+            UserResponseDto foundUserDto = new UserResponseDto()
+            {
+                Id = foundUser.Id,
+                UserName = foundUser.UserName,
+                Email = foundUser.Email,
+                Gender = foundUser.Gender,
+            };
+
+            return foundUserDto;
+        }
 
     }
 }
