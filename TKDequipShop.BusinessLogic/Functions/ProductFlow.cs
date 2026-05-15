@@ -60,5 +60,11 @@ namespace TKDequipShop.BusinessLogic.Functions
 
             return updatedProductDto;
         }
+
+        public bool DeleteProductAction(int id)
+        {
+
+            return ExecuteDeleteProductAction(id);
+        }
     }
 }

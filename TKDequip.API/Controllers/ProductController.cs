@@ -38,5 +38,12 @@ namespace TKDequip.API.Controllers
             return Ok(_updatedProduct);
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(int id)
+        {
+            var IsDeleted = _productActions.DeleteProductAction(id);
+            if (!IsDeleted) return NotFound();
+            return NoContent();
+        }
     }
 }

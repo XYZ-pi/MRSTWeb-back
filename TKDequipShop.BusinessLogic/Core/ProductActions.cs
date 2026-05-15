@@ -46,9 +46,19 @@ namespace TKDequipShop.BusinessLogic.Core
             ProductToUpdate.Description = _product.Description;
             ProductToUpdate.Price = _product.Price;
             ProductToUpdate.UpdatedAt = DateTime.Now;
-        
+
             return ProductToUpdate;
         }
 
+        public bool ExecuteDeleteProductAction(int id)
+        {
+            var ProductToDelete = products.FirstOrDefault(p => p.Id == id);
+
+            if (ProductToDelete == null) return false;
+            products.Remove(ProductToDelete);
+
+            return true;
+        }
     }
+
 }
