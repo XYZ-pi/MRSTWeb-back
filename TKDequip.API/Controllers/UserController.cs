@@ -26,5 +26,11 @@ namespace TKDequip.API.Controllers
             return Ok(_users);
         }
 
+        [HttpPost]
+        public IActionResult CreateNewUser(UserCreateDto _user)
+        {
+            var _newUser = _userActions.CreateNewUserAction(_user);
+            return Created($"/api/user/{_newUser.Id}", _newUser);
+        }
     }
 }

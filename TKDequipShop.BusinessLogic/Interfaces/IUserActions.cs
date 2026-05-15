@@ -11,6 +11,6 @@ namespace TKDequipShop.BusinessLogic.Interfaces
     {
         public List<UserResponseDto> GetAllUsersAction();
 
-
+        public UserResponseDto CreateNewUserAction(UserCreateDto _user);
     }
 }
