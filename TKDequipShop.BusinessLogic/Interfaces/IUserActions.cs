@@ -10,7 +10,8 @@ namespace TKDequipShop.BusinessLogic.Interfaces
     public interface IUserActions
     {
         public List<UserResponseDto> GetAllUsersAction();
-
         public UserResponseDto CreateNewUserAction(UserCreateDto _user);
+        public UserResponseDto UpdateUserAction(int id, UserCreateDto _user);
+
     }
 }

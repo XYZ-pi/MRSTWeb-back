@@ -38,5 +38,20 @@ namespace TKDequipShop.BusinessLogic.Core
 
             return newUser;
         }
+
+        public UserData ExecuteUpdateUserAction(int id, UserCreateDto _user)
+        {
+            var UserToUpdate = users.FirstOrDefault(p => p.Id == id);
+
+            if (UserToUpdate == null) return null;
+
+            UserToUpdate.UserName = _user.UserName;
+            UserToUpdate.Email = _user.Email;
+            UserToUpdate.Password = _user.Password;
+            UserToUpdate.DefaultPaymentMethod = _user.DefaultPaymentMethod;
+            UserToUpdate.DOB = _user.DOB;
+
+            return UserToUpdate;
+        }
     }
 }

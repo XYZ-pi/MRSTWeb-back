@@ -4,6 +4,7 @@ using TKDequipShop.BusinessLogic.Core;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Models.User;
 using TKDequipShop.BusinessLogic;
+using TKDequipShop.BusinessLogic.Functions;
 
 namespace TKDequip.API.Controllers
 {
@@ -31,6 +32,16 @@ namespace TKDequip.API.Controllers
         {
             var _newUser = _userActions.CreateNewUserAction(_user);
             return Created($"/api/user/{_newUser.Id}", _newUser);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(int id, UserCreateDto _user)
+        {
+            var _updatedUser = _userActions.UpdateUserAction(id, _user);
+
+            if (_updatedUser == null) return NotFound();
+
+            return Ok(_updatedUser);
         }
     }
 }

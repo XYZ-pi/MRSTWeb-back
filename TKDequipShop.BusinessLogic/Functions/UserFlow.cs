@@ -44,6 +44,21 @@ namespace TKDequipShop.BusinessLogic.Functions
             };
             return newUserDto;
         }
+
+        public UserResponseDto UpdateUserAction(int id, UserCreateDto _user)
+        {
+            var updatedUser = ExecuteUpdateUserAction(id, _user);
+
+            UserResponseDto updatedUserDto = new UserResponseDto()
+            {
+                Id = updatedUser.Id,
+                UserName = updatedUser.UserName,
+                Email = updatedUser.Email,
+                Gender = updatedUser.Gender,
+            };
+
+            return updatedUserDto;
+        }
     }
 }
 
