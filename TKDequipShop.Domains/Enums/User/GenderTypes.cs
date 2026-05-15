@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TKDequipShop.Domains.Enums.User
 {
-    internal class GenderTypes
+    public enum GenderTypes
     {
+
     }
 }

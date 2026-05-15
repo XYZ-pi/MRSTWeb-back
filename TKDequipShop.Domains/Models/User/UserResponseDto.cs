@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TKDequipShop.Domains.Enums.User;
 
 namespace TKDequipShop.Domains.Models.User
 {
-    internal class UserResponseDto
+    public class UserResponseDto
     {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public GenderTypes Gender { get; set; }
     }
 }

@@ -14,5 +14,10 @@ namespace TKDequipShop.BusinessLogic
         {
             return new ProductFlow();
         }
+
+        public IUserActions GetUserActions()
+        {
+            return new UserFlow();
+        }
     }
 }
