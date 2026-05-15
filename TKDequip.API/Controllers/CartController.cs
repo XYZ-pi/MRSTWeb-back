@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TKDequipShop.BusinessLogic.Interfaces;
+using TKDequipShop.Domains.Entities.Cart;
 
 namespace TKDequip.API.Controllers
 {
@@ -22,8 +23,15 @@ namespace TKDequip.API.Controllers
             if (_cart == null) return NotFound();
 
             return Ok(_cart);
-        }   
+        }
 
+        [HttpPost("{_userId}/items")]
+        public IActionResult PostItemToCart(int _userId, CartItemData _item)
+        {
+            var _cart = _cartActions.PostItemToCart(_userId, _item);
+            return Ok(_cart);
+        }
+        
 
     }
 }

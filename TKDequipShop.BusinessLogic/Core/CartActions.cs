@@ -22,5 +22,13 @@ namespace TKDequipShop.BusinessLogic.Core
 
             return CartToFound;
         }
+
+        public CartItemData ExecutePostItemToCart(int _userId, CartItemData _item)
+        {
+            var CartToFound = carts.FirstOrDefault(c => c.UserId == _userId);
+            if (CartToFound == null) return null;
+            CartToFound.Items.Add(_item);
+            return _item;
+        }
     }
 }
