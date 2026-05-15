@@ -18,5 +18,7 @@ namespace TKDequipShop.BusinessLogic.Interfaces
         public bool DeleteProductAction(int id);
 
         public ProductResponseDto GetByIdProductAction(int id);
+
+        public List<ProductResponseDto> GetByCategoryProductsAction(string _category);
     }
 }

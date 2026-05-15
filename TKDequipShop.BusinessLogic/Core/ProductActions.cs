@@ -68,6 +68,12 @@ namespace TKDequipShop.BusinessLogic.Core
 
             return ProductToFound;
         }
+
+        public List<ProductData> ExecuteGetByCategoryProductsAction(string category)
+        {
+            var ProductsToFound = products.Where(p => p.Category.Contains(category, StringComparison.OrdinalIgnoreCase)).ToList();
+            return ProductsToFound;
+        }
     }
 
 }

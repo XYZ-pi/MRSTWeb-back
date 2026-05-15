@@ -83,5 +83,23 @@ namespace TKDequipShop.BusinessLogic.Functions
 
             return foundProductDto;
         }
+
+        public List<ProductResponseDto> GetByCategoryProductsAction(string _category)
+        {
+            var products = ExecuteGetByCategoryProductsAction(_category);
+            List<ProductResponseDto> productsDto = new List<ProductResponseDto>();
+            foreach (var product in products)
+            {
+                var productRespDto = new ProductResponseDto()
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Description = product.Description,
+                };
+                productsDto.Add(productRespDto);
+            }
+            return productsDto;
+        }
     }
 }

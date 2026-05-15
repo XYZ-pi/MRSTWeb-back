@@ -55,5 +55,15 @@ namespace TKDequip.API.Controllers
 
             return Ok(_product);
         }
+
+        [HttpGet("{category}")]
+        public IActionResult GetByCategory(string _category)
+        {
+            var _product = _productActions.GetByCategoryProductsAction(_category);
+
+            if (_product == null) return NotFound();
+
+            return Ok(_product);
+        }
     }
 }
