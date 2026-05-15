@@ -43,5 +43,15 @@ namespace TKDequip.API.Controllers
 
             return Ok(_updatedUser);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            var IsDeleted = _userActions.DeleteUserAction(id);
+
+            if (!IsDeleted) return NotFound();
+
+            return NoContent();
+        }
     }
 }

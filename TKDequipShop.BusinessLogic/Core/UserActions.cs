@@ -41,7 +41,7 @@ namespace TKDequipShop.BusinessLogic.Core
 
         public UserData ExecuteUpdateUserAction(int id, UserCreateDto _user)
         {
-            var UserToUpdate = users.FirstOrDefault(p => p.Id == id);
+            var UserToUpdate = users.FirstOrDefault(u => u.Id == id);
 
             if (UserToUpdate == null) return null;
 
@@ -52,6 +52,16 @@ namespace TKDequipShop.BusinessLogic.Core
             UserToUpdate.DOB = _user.DOB;
 
             return UserToUpdate;
+        }
+
+        public bool ExecuteDeleteUserAction(int id)
+        {
+            var UserToDelete = users.FirstOrDefault(u => u.Id == id);
+
+            if (UserToDelete == null) return false;
+
+            users.Remove(UserToDelete);
+            return true;
         }
     }
 }
