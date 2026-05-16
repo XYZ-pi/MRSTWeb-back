@@ -12,7 +12,10 @@ namespace TKDequipShop.BusinessLogic.Interfaces
     {
         public CartResponseDto GetCartByUserIdAction(int _userId);
 
-        public CartResponseDto PostItemToCart(int _userId, CartItemData _item);
+        public CartResponseDto PostItemToCartAction(int _userId, CartItemData _item);
 
+        public CartResponseDto DeleteCartItemAction(int _userId, int _itemId);
+
+        public bool ClearCartAction(int _userId);
     }
 }

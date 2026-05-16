@@ -29,14 +29,9 @@ namespace TKDequipShop.BusinessLogic.Functions
             return cartDto;
         }
 
-        public CartResponseDto PostItemToCart(int _userId, CartItemData _item)
-        {
-            throw new NotImplementedException();
-        }
-
         public CartResponseDto PostItemToCartAction(int _userId, CartItemData _item)
         {
-            var item = ExecutePostItemToCart(_userId, _item);
+            var item = ExecutePostItemToCartAction(_userId, _item);
             if (item == null) return null;
             var cart = ExecuteGetCartByUserIdAction(_userId);
             CartResponseDto cartDto = new CartResponseDto()
@@ -48,5 +43,24 @@ namespace TKDequipShop.BusinessLogic.Functions
             };
             return cartDto;
         }
+
+        public CartResponseDto DeleteCartItemAction(int _userId, int _itemId)
+        {
+            var cart = ExecuteDeleteCartItemAction(_userId, _itemId);
+            if (cart == null) return null;
+            return new CartResponseDto()
+            {
+                Id = cart.Id,
+                UserId = cart.UserId,
+                Items = cart.Items,
+                Status = cart.Status,
+            };
+        }
+
+        public bool ClearCartAction(int _userId)
+        {
+            return ExecuteClearCartAction(_userId);
+        }
+
     }
 }
