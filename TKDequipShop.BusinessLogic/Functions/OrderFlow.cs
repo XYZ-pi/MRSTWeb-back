@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TKDequipShop.BusinessLogic.Core;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Entities.Order;
+using TKDequipShop.Domains.Enums.Order;
 using TKDequipShop.Domains.Models.Order;
 using TKDequipShop.Domains.Models.Product;
 
@@ -48,5 +49,23 @@ namespace TKDequipShop.BusinessLogic.Functions
             };
         }
 
+        public OrderResponseDto UpdateOrderStatusAction(int _orderId, OrderStatus _status)
+        {
+            var order = ExecuteUpdateOrderStatusAction(_orderId, _status);
+            if (order == null) return null;
+            return new OrderResponseDto()
+            {
+                Id = order.Id,
+                UserId = order.UserId,
+                Items = order.Items,
+                TotalPrice = order.TotalPrice,
+                Status = order.Status,
+            };
+        }
+
+        public bool DeleteOrderAction(int _orderId)
+        {
+            return ExecuteDeleteOrderAction(_orderId);
+        }
     }
 }

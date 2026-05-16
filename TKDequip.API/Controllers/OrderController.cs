@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TKDequipShop.BusinessLogic.Interfaces;
+using TKDequipShop.Domains.Enums.Order;
 using TKDequipShop.Domains.Models.Order;
 
 namespace TKDequip.API.Controllers
@@ -30,6 +31,22 @@ namespace TKDequip.API.Controllers
             var order = _orderActions.CreateOrderAction(_order);
             if (order == null) return BadRequest();
             return Ok(order);
+        }
+
+        [HttpPut("{_orderId}/status")]
+        public IActionResult UpdateOrderStatus(int _orderId, [FromBody] OrderStatus _status)
+        {
+            var order = _orderActions.UpdateOrderStatusAction(_orderId, _status);
+            if (order == null) return NotFound();
+            return Ok(order);
+        }
+
+        [HttpDelete("{_orderId}")]
+        public IActionResult DeleteOrder(int _orderId)
+        {
+            var result = _orderActions.DeleteOrderAction(_orderId);
+            if (!result) return NotFound();
+            return Ok();
         }
 
     }

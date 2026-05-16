@@ -34,5 +34,20 @@ namespace TKDequipShop.BusinessLogic.Core
             return newOrder;
         }
 
+        public OrderData ExecuteUpdateOrderStatusAction(int _orderId, OrderStatus _status)
+        {
+            var order = orders.FirstOrDefault(o => o.Id == _orderId);
+            if (order == null) return null;
+            order.Status = _status;
+            return order;
+        }
+
+        public bool ExecuteDeleteOrderAction(int _orderId)
+        {
+            var order = orders.FirstOrDefault(o => o.Id == _orderId);
+            if (order == null) return false;
+            orders.Remove(order);
+            return true;
+        }
     }
 }

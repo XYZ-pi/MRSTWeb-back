@@ -13,6 +13,8 @@ namespace TKDequipShop.BusinessLogic.Interfaces
     {
         public List<OrderData> GetAllOrdersOfUserAction(int _userId);
         public OrderResponseDto CreateOrderAction(OrderCreateDto _order);
+        public OrderResponseDto UpdateOrderStatusAction(int _orderId, OrderStatus _status);
+        public bool DeleteOrderAction(int _orderId);
 
     }
 }
