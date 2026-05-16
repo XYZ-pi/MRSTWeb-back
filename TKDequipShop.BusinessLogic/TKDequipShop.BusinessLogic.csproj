@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TKDequipShop.Domains\TKDequipShop.Domains.csproj" />
+    <ProjectReference Include="..\TKDequipShop.DataAccess\TKDequipShop.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

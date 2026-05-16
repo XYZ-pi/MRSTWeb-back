@@ -48,7 +48,9 @@ namespace TKDequipShop.BusinessLogic.Functions
         {
             var cart = ExecuteDeleteCartItemAction(_userId, _itemId);
             if (cart == null) return null;
+
             return new CartResponseDto()
+
             {
                 Id = cart.Id,
                 UserId = cart.UserId,

@@ -4,7 +4,7 @@ using TKDequipShop.BusinessLogic;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Models.Product;
 
-namespace TKDequip.API.Controllers
+namespace TKDequipShop.API.Controllers
 {
     [Route("api/product")]
     [ApiController]

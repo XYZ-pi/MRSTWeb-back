@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Entities.Cart;
 
-namespace TKDequip.API.Controllers
+namespace TKDequipShop.API.Controllers
 {
     [Route("api/cart")]
     [ApiController]

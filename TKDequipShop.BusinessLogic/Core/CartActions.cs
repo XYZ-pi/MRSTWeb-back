@@ -1,53 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TKDequipShop.Domains.Models.Cart;
+﻿using TKDequipShop.DataAccess.Context;
 using TKDequipShop.Domains.Entities.Cart;
-
 
 namespace TKDequipShop.BusinessLogic.Core
 {
     public class CartActions
     {
-        static List<CartData> carts = new List<CartData>();
-
-
         public CartData ExecuteGetCartByUserIdAction(int _userId)
         {
-            var CartToFound = carts.FirstOrDefault(c => c.UserId == _userId);
-
-            if (CartToFound == null) return null;
-
-            return CartToFound;
+            using (var db = new AppDbContext())
+            {
+                return db.CartDatas.FirstOrDefault(c => c.UserId == _userId);
+            }
         }
 
         public CartItemData ExecutePostItemToCartAction(int _userId, CartItemData _item)
         {
-            var CartToFound = carts.FirstOrDefault(c => c.UserId == _userId);
-            if (CartToFound == null) return null;
-            CartToFound.Items.Add(_item);
-            return _item;
-        }
+            using (var db = new AppDbContext())
+            {
+                var cart = db.CartDatas.FirstOrDefault(c => c.UserId == _userId);
+                if (cart == null) return null;
 
-        public CartData ExecuteDeleteCartItemAction(int _userId, int _itemId)
-        {
-            var cart = carts.FirstOrDefault(c => c.UserId == _userId);
-            if (cart == null) return null;
-            var item = cart.Items.FirstOrDefault(i => i.Id == _itemId);
-            if (item == null) return null;
-            cart.Items.Remove(item);
-            return cart;
+                cart.Items.Add(_item);
+                db.SaveChanges();
+
+                return _item;
+            }
         }
 
         public bool ExecuteClearCartAction(int _userId)
         {
-            var cart = carts.FirstOrDefault(c => c.UserId == _userId);
-            if (cart == null) return false;
-            cart.Items.Clear();
-            cart.TotalPrice = 0;
-            return true;
+            using (var db = new AppDbContext())
+            {
+                var cart = db.CartDatas.FirstOrDefault(c => c.UserId == _userId);
+                if (cart == null) return false;
+
+                cart.Items.Clear();
+                cart.TotalPrice = 0;
+
+                db.SaveChanges();
+                return true;
+            }
+        }
+        public CartData ExecuteDeleteCartItemAction(int _userId, int _itemId)
+        {
+            using (var db = new AppDbContext())
+            {
+                var cart = db.CartDatas.FirstOrDefault(c => c.UserId == _userId);
+
+                if (cart == null) return null;
+
+                var item = cart.Items.FirstOrDefault(i => i.Id == _itemId);
+                if (item == null) return null;
+
+                cart.Items.Remove(item);
+                db.SaveChanges();
+
+                return cart;
+                //var item = cart.Items.FirstOrDefault(i => i.Id == _itemId);
+                //if (item == null) return null;
+                //cart.Items.Remove(item);
+                //return cart;
+            }
         }
 
     }

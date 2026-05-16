@@ -13,10 +13,15 @@ namespace TKDequipShop.Domains.Entities.Cart
 {
     public class CartData : SharedFields
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public int UserId { get; set; }
         //public UserData User { get; set; }
+
         public List<CartItemData> Items { get; set; } = new List<CartItemData>();
+
         public decimal TotalPrice { get; set; }
         public CartStatus Status { get; set; }
         

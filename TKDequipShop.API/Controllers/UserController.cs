@@ -6,7 +6,7 @@ using TKDequipShop.Domains.Models.User;
 using TKDequipShop.BusinessLogic;
 using TKDequipShop.BusinessLogic.Functions;
 
-namespace TKDequip.API.Controllers
+namespace TKDequipShop.API.Controllers
 {
     [Route("api/user")]
     [ApiController]

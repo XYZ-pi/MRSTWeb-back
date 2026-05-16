@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TKDequip.API.Controllers
+namespace TKDequipShop.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

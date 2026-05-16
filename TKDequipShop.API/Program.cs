@@ -1,5 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
+TKDequipShop.DataAccess.DbSession.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

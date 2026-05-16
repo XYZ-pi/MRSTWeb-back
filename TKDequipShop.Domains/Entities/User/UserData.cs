@@ -13,9 +13,17 @@ namespace TKDequipShop.Domains.Entities.User
 {
     public class UserData : SharedFields
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Required]
+        [StringLength(100, MinimumLength = 1)]
         public string UserName { get; set; }
+        [Required]
+        [StringLength(100, MinimumLength = 1)]
         public string Password { get; set; }
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
         //public AddressData? DefaultAddress { get; set; }
         public PaymentMethods? DefaultPaymentMethod { get; set; }

@@ -4,7 +4,7 @@ using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Enums.Order;
 using TKDequipShop.Domains.Models.Order;
 
-namespace TKDequip.API.Controllers
+namespace TKDequipShop.API.Controllers
 {
     [Route("api/order")]
     [ApiController]
