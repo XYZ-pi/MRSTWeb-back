@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TKDequipShop.BusinessLogic.Core;
 using TKDequipShop.BusinessLogic.Interfaces;
+using TKDequipShop.Domains.Models.Order;
 
 namespace TKDequip.API.Controllers
 {
@@ -23,5 +23,14 @@ namespace TKDequip.API.Controllers
             var _orders = _orderActions.GetAllOrdersOfUserAction(_userId);
             return Ok(_orders);
         }
+
+        [HttpPost]
+        public IActionResult CreateOrder([FromBody] OrderCreateDto _order)
+        {
+            var order = _orderActions.CreateOrderAction(_order);
+            if (order == null) return BadRequest();
+            return Ok(order);
+        }
+
     }
 }

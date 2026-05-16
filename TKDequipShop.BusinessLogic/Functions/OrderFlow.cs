@@ -25,11 +25,28 @@ namespace TKDequipShop.BusinessLogic.Functions
                     Id = order.Id,
                     UserId = order.UserId,
                     TotalPrice = order.TotalPrice,
+                    Items = order.Items,
+                    Status = order.Status,
                 };
                 ordersDto.Add(orderRespDto);
 
             }
             return ordersDto;
         }
+
+        public OrderResponseDto CreateOrderAction(OrderCreateDto _order)
+        {
+            var order = ExecuteCreateOrderAction(_order);
+            if (order == null) return null;
+            return new OrderResponseDto()
+            {
+                Id = order.Id,
+                UserId = order.UserId,
+                Items = order.Items,
+                TotalPrice = order.TotalPrice,
+                Status = order.Status,
+            };
+        }
+
     }
 }
