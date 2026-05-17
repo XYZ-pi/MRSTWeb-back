@@ -29,5 +29,11 @@ namespace TKDequipShop.BusinessLogic
         {
             return new OrderFlow();
         }
+        public IAuthActions GetAuthActions()
+        {
+            return new AuthFlow();
+        }
+
+
     }
 }
