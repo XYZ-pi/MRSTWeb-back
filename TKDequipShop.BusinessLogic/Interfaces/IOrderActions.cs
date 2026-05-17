@@ -11,7 +11,7 @@ namespace TKDequipShop.BusinessLogic.Interfaces
 {
     public interface IOrderActions
     {
-        public List<OrderData> GetAllOrdersOfUserAction(int _userId);
+        public List<OrderResponseDto> GetAllOrdersOfUserAction(int _userId);
         public OrderResponseDto CreateOrderAction(OrderCreateDto _order);
         public OrderResponseDto UpdateOrderStatusAction(int _orderId, OrderStatus _status);
         public bool DeleteOrderAction(int _orderId);

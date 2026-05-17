@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using TKDequipShop.DataAccess.Context;
 using TKDequipShop.Domains.Entities.Product;
 using TKDequipShop.Domains.Models.Product;
 
@@ -12,68 +9,60 @@ namespace TKDequipShop.BusinessLogic.Core
 {
     public class ProductActions
     {
-        static List<ProductData> products = new List<ProductData>();
-        static int _nextId = 1;
+        protected AppDbContext _db = new AppDbContext();
+
         public List<ProductData> ExecuteGetAllProductsAction()
         {
-            return products;
+            return _db.ProductDatas.ToList();
         }
 
         public ProductData ExecuteCreateNewProductsAction(ProductCreateDto _product)
         {
             ProductData newProduct = new ProductData()
             {
-                Id = _nextId++,
                 Name = _product.Name,
                 Description = _product.Description,
                 Price = _product.Price,
+                Category = _product.Category,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
             };
-
-            products.Add(newProduct);
-
+            _db.ProductDatas.Add(newProduct);
+            _db.SaveChanges();
             return newProduct;
         }
 
         public ProductData ExecuteUpdateProductAction(int id, ProductCreateDto _product)
         {
-            var ProductToUpdate = products.FirstOrDefault(p => p.Id == id);
-
-            if (ProductToUpdate == null) return null;
-
-            ProductToUpdate.Name = _product.Name;
-            ProductToUpdate.Description = _product.Description;
-            ProductToUpdate.Price = _product.Price;
-            ProductToUpdate.UpdatedAt = DateTime.Now;
-
-            return ProductToUpdate;
+            var product = _db.ProductDatas.FirstOrDefault(p => p.Id == id);
+            if (product == null) return null;
+            product.Name = _product.Name;
+            product.Description = _product.Description;
+            product.Price = _product.Price;
+            product.UpdatedAt = DateTime.Now;
+            _db.SaveChanges();
+            return product;
         }
 
         public bool ExecuteDeleteProductAction(int id)
         {
-            var ProductToDelete = products.FirstOrDefault(p => p.Id == id);
-
-            if (ProductToDelete == null) return false;
-            products.Remove(ProductToDelete);
-
+            var product = _db.ProductDatas.FirstOrDefault(p => p.Id == id);
+            if (product == null) return false;
+            _db.ProductDatas.Remove(product);
+            _db.SaveChanges();
             return true;
         }
 
         public ProductData ExecuteGetByIdProductAction(int id)
         {
-            var ProductToFound = products.FirstOrDefault(p => p.Id == id);
-
-            if (ProductToFound == null) return null;
-
-            return ProductToFound;
+            return _db.ProductDatas.FirstOrDefault(p => p.Id == id);
         }
 
         public List<ProductData> ExecuteGetByCategoryProductsAction(string category)
         {
-            var ProductsToFound = products.Where(p => p.Category.Contains(category, StringComparison.OrdinalIgnoreCase)).ToList();
-            return ProductsToFound;
+            return _db.ProductDatas
+                .Where(p => p.Category.Contains(category))
+                .ToList();
         }
     }
-
 }

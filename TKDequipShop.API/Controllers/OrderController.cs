@@ -46,8 +46,10 @@ namespace TKDequipShop.API.Controllers
         {
             var result = _orderActions.DeleteOrderAction(_orderId);
             if (!result) return NotFound();
-            return Ok();
+            return NoContent();
         }
+
+        
 
     }
 }

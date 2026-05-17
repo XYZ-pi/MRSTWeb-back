@@ -16,21 +16,18 @@ namespace TKDequipShop.BusinessLogic.Functions
     {
         public List<OrderResponseDto> GetAllOrdersOfUserAction(int _userId)
         {
-            var orders = GetAllOrdersOfUserAction(_userId);
+            var orders = ExecuteGetAllOrdersOfUserAction(_userId);
             List<OrderResponseDto> ordersDto = new List<OrderResponseDto>();
-
             foreach (var order in orders)
             {
-                var orderRespDto = new OrderResponseDto()
+                ordersDto.Add(new OrderResponseDto()
                 {
                     Id = order.Id,
                     UserId = order.UserId,
-                    TotalPrice = order.TotalPrice,
                     Items = order.Items,
+                    TotalPrice = order.TotalPrice,
                     Status = order.Status,
-                };
-                ordersDto.Add(orderRespDto);
-
+                });
             }
             return ordersDto;
         }

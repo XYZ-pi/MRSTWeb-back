@@ -1,53 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using TKDequipShop.DataAccess.Context;
 using TKDequipShop.Domains.Entities.Order;
-using TKDequipShop.Domains.Entities.Product;
 using TKDequipShop.Domains.Enums.Order;
 using TKDequipShop.Domains.Models.Order;
+using Microsoft.EntityFrameworkCore;
 
-namespace TKDequipShop.BusinessLogic.Core
+public class OrderActions
 {
-    public class OrderActions
+    protected AppDbContext _db = new AppDbContext();
+
+    public List<OrderData> ExecuteGetAllOrdersOfUserAction(int _userId)
     {
-        static List<OrderData> orders = new List<OrderData>();
-        static int _nextId = 1;
-        public List<OrderData> GetAllOrdersOfUserAction(int _userId)
-        {
-            return orders.Where(o => o.UserId == _userId).ToList();
+        return _db.OrderDatas.Where(o => o.UserId == _userId).ToList();
+    }
 
-        }
-
-        public OrderData ExecuteCreateOrderAction(OrderCreateDto _order)
+    public OrderData ExecuteCreateOrderAction(OrderCreateDto _order)
+    {
+        OrderData newOrder = new OrderData()
         {
-            OrderData newOrder = new OrderData()
-            {
-                Id = _nextId++,
-                UserId = _order.UserId,
-                Items = _order.Items,
-                TotalPrice = _order.Items.Sum(i => i.Price * i.Quantity),
-                Status = OrderStatus.New,
-            };
-            orders.Add(newOrder);
-            return newOrder;
-        }
+            UserId = _order.UserId,
+            Items = _order.Items,
+            TotalPrice = _order.Items.Sum(i => i.Price * i.Quantity),
+            Status = OrderStatus.New,
+        };
+        _db.OrderDatas.Add(newOrder);
+        _db.SaveChanges();
+        return newOrder;
+    }
 
-        public OrderData ExecuteUpdateOrderStatusAction(int _orderId, OrderStatus _status)
-        {
-            var order = orders.FirstOrDefault(o => o.Id == _orderId);
-            if (order == null) return null;
-            order.Status = _status;
-            return order;
-        }
+    public OrderData ExecuteUpdateOrderStatusAction(int _orderId, OrderStatus _status)
+    {
+        var order = _db.OrderDatas.FirstOrDefault(o => o.Id == _orderId);
+        if (order == null) return null;
+        order.Status = _status;
+        _db.SaveChanges();
+        return order;
+    }
 
-        public bool ExecuteDeleteOrderAction(int _orderId)
-        {
-            var order = orders.FirstOrDefault(o => o.Id == _orderId);
-            if (order == null) return false;
-            orders.Remove(order);
-            return true;
-        }
+    public bool ExecuteDeleteOrderAction(int _orderId)
+    {
+        var order = _db.OrderDatas
+            .Include(o => o.Items)
+            .FirstOrDefault(o => o.Id == _orderId);
+        if (order == null) return false;
+        _db.OrderItemDatas.RemoveRange(order.Items);
+        _db.OrderDatas.Remove(order);
+        _db.SaveChanges();
+        return true;
     }
 }
