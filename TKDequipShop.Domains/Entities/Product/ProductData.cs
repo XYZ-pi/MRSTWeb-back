@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TKDequipShop.Domains.Entities.Cart;
+using TKDequipShop.Domains.Entities.Order;
 using TKDequipShop.Domains.Entities.Refs;
 
 namespace TKDequipShop.Domains.Entities.Product
@@ -24,5 +26,10 @@ namespace TKDequipShop.Domains.Entities.Product
         [Required]
         [StringLength(100, MinimumLength = 1)]
         public string Category { get; set; }
+        [InverseProperty("Product")]
+        public List<CartItemData> CartItems { get; set; } = new List<CartItemData>();
+
+        [InverseProperty("Product")]
+        public List<OrderItemData> OrderItems { get; set; } = new List<OrderItemData>();
     }
 }

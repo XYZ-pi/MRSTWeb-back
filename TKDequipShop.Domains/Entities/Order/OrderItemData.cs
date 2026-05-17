@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TKDequipShop.Domains.Entities.Product;
 
 namespace TKDequipShop.Domains.Entities.Order
 {
@@ -22,5 +23,9 @@ namespace TKDequipShop.Domains.Entities.Order
         public int OrderId { get; set; }
         [ForeignKey("OrderId")]
         public OrderData Order { get; set; }
+        [ForeignKey("ProductId")]
+        public ProductData Product { get; set; }
+        public decimal UnitPrice { get; set; }
     }
+
 }
