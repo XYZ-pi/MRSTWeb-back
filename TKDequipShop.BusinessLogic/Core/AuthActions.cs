@@ -32,7 +32,6 @@ namespace TKDequipShop.BusinessLogic.Core
                 UserName = _register.UserName,
                 Email = _register.Email,
                 Password = _register.Password,
-                Role = _register.Role,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
                 IsActive = true,
