@@ -56,7 +56,7 @@ namespace TKDequipShop.API.Controllers
             return Ok(_product);
         }
 
-        [HttpGet("{category}")]
+        [HttpGet("category/{category}")]
         public IActionResult GetByCategory(string _category)
         {
             var _product = _productActions.GetByCategoryProductsAction(_category);

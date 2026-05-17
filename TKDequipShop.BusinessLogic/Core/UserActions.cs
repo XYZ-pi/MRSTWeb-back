@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TKDequipShop.Domains.Entities.Product;
 using TKDequipShop.Domains.Entities.User;
-using TKDequipShop.Domains.Models.Product;
 using TKDequipShop.Domains.Models.User;
 using TKDequipShop.DataAccess.Context;
+using TKDequipShop.Domains.Entities.Cart;
+using TKDequipShop.Domains.Enums.Cart;
 
 namespace TKDequipShop.BusinessLogic.Core
 {
@@ -32,9 +33,22 @@ namespace TKDequipShop.BusinessLogic.Core
                 Gender = _user.Gender,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
+                IsActive = true,
             };
 
             _db.UserDatas.Add(newUser);
+            _db.SaveChanges();
+
+            CartData newCart = new CartData()
+            {
+                UserId = newUser.Id,
+                TotalPrice = 0,
+                Status = CartStatus.Active,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+            };
+            
+            _db.CartDatas.Add(newCart);
             _db.SaveChanges();
 
             return newUser;
