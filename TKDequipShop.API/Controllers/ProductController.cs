@@ -70,5 +70,13 @@ namespace TKDequipShop.API.Controllers
 
             return Ok(_product);
         }
+
+        [HttpPost("seed")]
+        [AllowAnonymous]
+        public IActionResult SeedProducts()
+        {
+            _productActions.SeedProducts();
+            return Ok("Товары добавлены!");
+        }
     }
 }

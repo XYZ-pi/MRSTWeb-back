@@ -11,6 +11,10 @@ namespace TKDequipShop.BusinessLogic.Functions
 {
     public class ProductFlow : ProductActions, IProductActions
     {
+        public void SeedProducts()
+        {
+            ExecuteSeedProducts();
+        }
         public List<ProductResponseDto> GetAllProductsAction()
         {
             var products = ExecuteGetAllProductsAction();
@@ -24,6 +28,11 @@ namespace TKDequipShop.BusinessLogic.Functions
                     Name = product.Name,
                     Price = product.Price,
                     Description = product.Description,
+                    Category = product.Category,
+                    Image = product.Image,
+                    RatingRate = product.RatingRate,
+                    RatingCount = product.RatingCount,
+                    Badge = product.Badge,
                 };
                 productsDto.Add(productRespDto);
 
@@ -41,6 +50,11 @@ namespace TKDequipShop.BusinessLogic.Functions
                 Name = newProduct.Name,
                 Price = newProduct.Price,
                 Description = newProduct.Description,
+                Category = newProduct.Category,
+                Image = newProduct.Image,
+                RatingRate = newProduct.RatingRate,
+                RatingCount = newProduct.RatingCount,
+                Badge = newProduct.Badge,
             };
 
             return newProductDto;
@@ -56,6 +70,11 @@ namespace TKDequipShop.BusinessLogic.Functions
                 Name = updatedProduct.Name,
                 Price = updatedProduct.Price,
                 Description = updatedProduct.Description,
+                Category = updatedProduct.Category,
+                Image = updatedProduct.Image,
+                RatingRate = updatedProduct.RatingRate,
+                RatingCount = updatedProduct.RatingCount,
+                Badge = updatedProduct.Badge,
             };
 
             return updatedProductDto;
@@ -79,6 +98,11 @@ namespace TKDequipShop.BusinessLogic.Functions
                 Name = foundProduct.Name,
                 Price = foundProduct.Price,
                 Description = foundProduct.Description,
+                Category = foundProduct.Category,
+                Image = foundProduct.Image,
+                RatingRate = foundProduct.RatingRate,
+                RatingCount = foundProduct.RatingCount,
+                Badge = foundProduct.Badge,
             };
 
             return foundProductDto;
@@ -96,6 +120,11 @@ namespace TKDequipShop.BusinessLogic.Functions
                     Name = product.Name,
                     Price = product.Price,
                     Description = product.Description,
+                    Category = product.Category,
+                    Image = product.Image,
+                    RatingRate = product.RatingRate,
+                    RatingCount = product.RatingCount,
+                    Badge = product.Badge,
                 };
                 productsDto.Add(productRespDto);
             }

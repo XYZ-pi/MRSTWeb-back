@@ -31,5 +31,11 @@ namespace TKDequipShop.Domains.Entities.Product
 
         [InverseProperty("Product")]
         public List<OrderItemData> OrderItems { get; set; } = new List<OrderItemData>();
+        [StringLength(500)]
+        public string? Image { get; set; }
+        public double RatingRate { get; set; } = 0;
+        public int RatingCount { get; set; } = 0;
+        [StringLength(50)]
+        public string? Badge { get; set; }
     }
 }

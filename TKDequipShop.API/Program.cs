@@ -4,6 +4,17 @@ using System.Text;
 using TKDequipShop.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFront", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 DbSession.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 
@@ -60,6 +71,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+app.UseCors("AllowFront");
 
 if (app.Environment.IsDevelopment())
 {

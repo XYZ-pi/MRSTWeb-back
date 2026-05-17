@@ -7,8 +7,10 @@ using TKDequipShop.Domains.Models.Product;
 
 namespace TKDequipShop.BusinessLogic.Interfaces
 {
+
     public interface IProductActions
     {
+        public void SeedProducts();
         public List<ProductResponseDto> GetAllProductsAction();
 
         public ProductResponseDto CreateNewProductAction(ProductCreateDto _product);
