@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Enums.Order;
@@ -8,7 +8,7 @@ namespace TKDequipShop.API.Controllers
 {
     [Route("api/order")]
     [ApiController]
-
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private IOrderActions _orderActions;
@@ -19,6 +19,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpGet("{_userId}")]
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult GetAllOrdersOfUser(int _userId)
         {
             var _orders = _orderActions.GetAllOrdersOfUserAction(_userId);
@@ -26,6 +27,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateOrder([FromBody] OrderCreateDto _order)
         {
             var order = _orderActions.CreateOrderAction(_order);
@@ -34,6 +36,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpPut("{_orderId}/status")]
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult UpdateOrderStatus(int _orderId, [FromBody] OrderStatus _status)
         {
             var order = _orderActions.UpdateOrderStatusAction(_orderId, _status);
@@ -42,6 +45,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpDelete("{_orderId}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteOrder(int _orderId)
         {
             var result = _orderActions.DeleteOrderAction(_orderId);

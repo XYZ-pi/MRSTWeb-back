@@ -5,11 +5,14 @@ using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Models.User;
 using TKDequipShop.BusinessLogic;
 using TKDequipShop.BusinessLogic.Functions;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace TKDequipShop.API.Controllers
 {
     [Route("api/user")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private IUserActions _userActions;
@@ -21,6 +24,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpGet("all")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAllUsers()
         {
             var _users = _userActions.GetAllUsersAction();
@@ -28,6 +32,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult CreateNewUser(UserCreateDto _user)
         {
             var _newUser = _userActions.CreateNewUserAction(_user);
@@ -35,6 +40,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult UpdateUser(int id, UserCreateDto _user)
         {
             var _updatedUser = _userActions.UpdateUserAction(id, _user);
@@ -45,6 +51,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteUser(int id)
         {
             var IsDeleted = _userActions.DeleteUserAction(id);
@@ -55,6 +62,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult GetUserById(int id)
         {
             var _user = _userActions.GetUserByIdAction(id);

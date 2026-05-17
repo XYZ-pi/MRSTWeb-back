@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using TKDequipShop.BusinessLogic;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Models.Product;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TKDequipShop.API.Controllers
 {
     [Route("api/product")]
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private IProductActions _productActions;
@@ -18,6 +20,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpGet("all")]
+        [AllowAnonymous]
         public IActionResult GetAllProducts()
         {
             var _products = _productActions.GetAllProductsAction();
@@ -25,6 +28,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult CreateNewProduct(ProductCreateDto _product)
         {
             var _newProduct = _productActions.CreateNewProductAction(_product);
@@ -32,6 +36,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult UpdateProduct(int id, ProductCreateDto _product)
         {
             var _updatedProduct = _productActions.UpdateProductAction(id, _product);
@@ -39,6 +44,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteProduct(int id)
         {
             var IsDeleted = _productActions.DeleteProductAction(id);
@@ -47,6 +53,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetProductById(int id)
         {
             var _product = _productActions.GetByIdProductAction(id);
@@ -57,6 +64,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpGet("category/{category}")]
+        [AllowAnonymous]
         public IActionResult GetByCategory(string _category)
         {
             var _product = _productActions.GetByCategoryProductsAction(_category);

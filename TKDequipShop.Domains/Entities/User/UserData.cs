@@ -34,5 +34,6 @@ namespace TKDequipShop.Domains.Entities.User
         public bool IsActive { get; set; }
         public CartData? Cart { get; set; }
         public List<OrderData> Orders { get; set; } = new List<OrderData>();
+        public UserRole Role { get; set; } = UserRole.User;
     }
 }

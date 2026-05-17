@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Entities.Cart;
@@ -7,6 +7,7 @@ namespace TKDequipShop.API.Controllers
 {
     [Route("api/cart")]
     [ApiController]
+    [Authorize]
     public class CartController : ControllerBase
     {
         private ICartActions _cartActions;
@@ -17,6 +18,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpGet("{_userId}")] //get cart by user id
+        [Authorize]
         public IActionResult GetCartByUserId(int _userId)
         {
             var _cart = _cartActions.GetCartByUserIdAction(_userId);
@@ -26,6 +28,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpPost("{_userId}/items")]
+        [Authorize]
         public IActionResult PostItemToCart(int _userId, [FromBody]CartItemData _item)
         {
             var _cart = _cartActions.PostItemToCartAction(_userId, _item);
@@ -34,6 +37,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpDelete("{_userId}/items/{_itemId}")]
+        [Authorize]
         public IActionResult DeleteCartItem(int _userId, int _itemId)
         {
             var _cart = _cartActions.DeleteCartItemAction(_userId, _itemId);
@@ -42,6 +46,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpDelete("{_userId}")]
+        [Authorize]
         public IActionResult ClearCart(int _userId)
         {
             var result = _cartActions.ClearCartAction(_userId);
