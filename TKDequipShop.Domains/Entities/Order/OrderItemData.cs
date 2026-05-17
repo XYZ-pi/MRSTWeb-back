@@ -19,5 +19,8 @@ namespace TKDequipShop.Domains.Entities.Order
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
+        public int OrderId { get; set; }
+        [ForeignKey("OrderId")]
+        public OrderData Order { get; set; }
     }
 }

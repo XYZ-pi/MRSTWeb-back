@@ -15,9 +15,11 @@ namespace TKDequipShop.Domains.Entities.Cart
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int CartId { get; set; }
-        //public CartData Cart { get; set; }
+        [ForeignKey("CartId")]
+        public CartData Cart { get; set; }
         public int ProductId { get; set; }
-        //public ProductData Product { get; set; }
+        [ForeignKey("ProductId")]
+        public ProductData Product { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal TotalPrice { get; set; }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TKDequipShop.Domains.Enums.Order;
+using TKDequipShop.Domains.Entities.User;
 
 namespace TKDequipShop.Domains.Entities.Order
 {
@@ -15,6 +16,9 @@ namespace TKDequipShop.Domains.Entities.Order
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public UserData User { get; set; }
+        [InverseProperty("Order")]
         public List<OrderItemData> Items { get; set; } = new List<OrderItemData>();
         public decimal TotalPrice { get; set; }
         public OrderStatus Status { get; set; }

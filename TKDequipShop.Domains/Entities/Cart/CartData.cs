@@ -18,8 +18,9 @@ namespace TKDequipShop.Domains.Entities.Cart
         public int Id { get; set; }
 
         public int UserId { get; set; }
-        //public UserData User { get; set; }
-
+        [ForeignKey("UserId")]
+        public UserData User { get; set; }
+        [InverseProperty("Cart")]
         public List<CartItemData> Items { get; set; } = new List<CartItemData>();
 
         public decimal TotalPrice { get; set; }
