@@ -13,5 +13,8 @@ namespace TKDequipShop.Domains.Models.User
         public string UserName { get; set; }
         public string Email { get; set; }
         public GenderTypes Gender { get; set; }
+        public UserRole Role { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TKDequipShop.BusinessLogic.Core;
 using TKDequipShop.BusinessLogic.Interfaces;
+using TKDequipShop.Domains.Enums.User;
 using TKDequipShop.Domains.Models.Product;
 using TKDequipShop.Domains.Models.User;
 
@@ -16,17 +17,18 @@ namespace TKDequipShop.BusinessLogic.Functions
         {
             var users = ExecuteGetAllUsersAction();
             List<UserResponseDto> usersDto = new List<UserResponseDto>();
-
             foreach (var user in users)
             {
                 var userRespDto = new UserResponseDto()
                 {
-                        Id = user.Id,
-                        UserName = user.UserName,
-                        Email = user.Email,
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Role = user.Role,           
+                    IsActive = user.IsActive,   
+                    CreatedAt = user.CreatedAt, 
                 };
                 usersDto.Add(userRespDto);
-
             }
             return usersDto;
         }
@@ -40,6 +42,9 @@ namespace TKDequipShop.BusinessLogic.Functions
                 UserName = newUser.UserName,
                 Email = newUser.Email,
                 Gender = newUser.Gender,
+                Role = newUser.Role,
+                IsActive = newUser.IsActive,
+                CreatedAt = newUser.CreatedAt,
 
             };
             return newUserDto;
@@ -55,6 +60,9 @@ namespace TKDequipShop.BusinessLogic.Functions
                 UserName = updatedUser.UserName,
                 Email = updatedUser.Email,
                 Gender = updatedUser.Gender,
+                Role = updatedUser.Role,
+                IsActive = updatedUser.IsActive,
+                CreatedAt = updatedUser.CreatedAt,
             };
 
             return updatedUserDto;
@@ -77,10 +85,20 @@ namespace TKDequipShop.BusinessLogic.Functions
                 UserName = foundUser.UserName,
                 Email = foundUser.Email,
                 Gender = foundUser.Gender,
+                Role = foundUser.Role,
+                IsActive = foundUser.IsActive,
+                CreatedAt = foundUser.CreatedAt,
             };
 
             return foundUserDto;
         }
+
+        public bool ChangeRoleAction(int _userId, UserRole _role)
+            => ExecuteChangeRoleAction(_userId, _role);
+
+        public bool ToggleActiveAction(int _userId)
+            => ExecuteToggleActiveAction(_userId);
+
 
     }
 }

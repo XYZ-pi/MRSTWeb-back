@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TKDequipShop.Domains.Entities.Product;
-using TKDequipShop.Domains.Entities.User;
-using TKDequipShop.Domains.Models.User;
 using TKDequipShop.DataAccess.Context;
 using TKDequipShop.Domains.Entities.Cart;
+using TKDequipShop.Domains.Entities.Product;
+using TKDequipShop.Domains.Entities.User;
 using TKDequipShop.Domains.Enums.Cart;
+using TKDequipShop.Domains.Enums.User;
+using TKDequipShop.Domains.Models.User;
 
 namespace TKDequipShop.BusinessLogic.Core
 {
@@ -85,6 +86,22 @@ namespace TKDequipShop.BusinessLogic.Core
             return _db.UserDatas.FirstOrDefault(u => u.Id == id);
         }
 
+        public bool ExecuteChangeRoleAction(int _userId, UserRole _role)
+        {
+            var user = _db.UserDatas.FirstOrDefault(u => u.Id == _userId);
+            if (user == null) return false;
+            user.Role = _role;
+            _db.SaveChanges();
+            return true;
+        }
 
+        public bool ExecuteToggleActiveAction(int _userId)
+        {
+            var user = _db.UserDatas.FirstOrDefault(u => u.Id == _userId);
+            if (user == null) return false;
+            user.IsActive = !user.IsActive;
+            _db.SaveChanges();
+            return true;
+        }
     }
 }

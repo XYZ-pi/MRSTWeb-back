@@ -50,5 +50,11 @@ namespace TKDequipShop.BusinessLogic.Core
 
             return newUser;
         }
+
+        public UserData ExecuteGetUserByIdAction(int _userId)
+        {
+            return _db.UserDatas.FirstOrDefault(u => u.Id == _userId);
+        }
     }
+
 }

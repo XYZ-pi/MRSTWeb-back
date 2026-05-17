@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TKDequipShop.Domains.Entities.User;
 using TKDequipShop.Domains.Models.Auth;
 
 namespace TKDequipShop.BusinessLogic.Interfaces
@@ -11,5 +12,6 @@ namespace TKDequipShop.BusinessLogic.Interfaces
     {
         public string LoginAction(LoginDto _login);
         public string RegisterAction(RegisterDto _register);
+        UserData GetUserByIdAction(int _userId);
     }
 }

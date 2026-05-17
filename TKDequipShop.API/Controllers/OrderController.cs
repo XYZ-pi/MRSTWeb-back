@@ -4,6 +4,7 @@ using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Enums.Order;
 using TKDequipShop.Domains.Models.Order;
 using TKDequipShop.API.Attributes;
+using System.Security.Claims;
 
 namespace TKDequipShop.API.Controllers
 {
@@ -18,20 +19,29 @@ namespace TKDequipShop.API.Controllers
             _orderActions = _bl.GetOrderActions();
         }
 
-        [HttpGet("{_userId}")]
-        [ManagerMod]
+        [HttpGet("{my}")]
+        [UserMod]
         public IActionResult GetAllOrdersOfUser(int _userId)
         {
-            var _orders = _orderActions.GetAllOrdersOfUserAction(_userId);
-            return Ok(_orders);
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!int.TryParse(userIdClaim, out int userId))
+                return Unauthorized("Не удалось определить пользователя из токена");
+
+            var orders = _orderActions.GetAllOrdersOfUserAction(userId);
+            return Ok(orders);
         }
 
         [HttpPost]
         [UserMod]
         public IActionResult CreateOrder([FromBody] OrderCreateDto _order)
         {
-            var order = _orderActions.CreateOrderAction(_order);
-            if (order == null) return BadRequest();
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(userIdClaim, out int userId))
+                return Unauthorized("Не удалось определить пользователя из токена");
+
+            var order = _orderActions.CreateOrderAction(userId, _order);
+            if (order == null) return BadRequest("Ошибка создания заказа");
             return Ok(order);
         }
 

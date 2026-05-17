@@ -32,9 +32,9 @@ namespace TKDequipShop.BusinessLogic.Functions
             return ordersDto;
         }
 
-        public OrderResponseDto CreateOrderAction(OrderCreateDto _order)
+        public OrderResponseDto CreateOrderAction(int _userId, OrderCreateDto _order)
         {
-            var order = ExecuteCreateOrderAction(_order);
+            var order = ExecuteCreateOrderAction(_userId, _order);
             if (order == null) return null;
             return new OrderResponseDto()
             {

@@ -15,17 +15,20 @@ namespace TKDequipShop.BusinessLogic.Core
             return _db.OrderDatas.Where(o => o.UserId == _userId).ToList();
         }
 
-        public OrderData ExecuteCreateOrderAction(OrderCreateDto _order)
+        public OrderData ExecuteCreateOrderAction(int _userId, OrderCreateDto _order)
         {
+            var userExists = _db.UserDatas.Any(u => u.Id == _userId);
+            if (!userExists) return null;
             OrderData newOrder = new OrderData()
             {
-                UserId = _order.UserId,
+                UserId = _userId,
                 Items = _order.Items.Select(i => new OrderItemData
                 {
                     ProductId = i.ProductId,
                     ProductName = i.ProductName,
                     Price = i.Price,
-                    Quantity = i.Quantity
+                    Quantity = i.Quantity,
+                    UnitPrice = i.Price,
                 }).ToList(),
 
                 TotalPrice = _order.Items.Sum(i => i.Price * i.Quantity),

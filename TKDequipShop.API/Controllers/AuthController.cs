@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TKDequipShop.BusinessLogic;
+using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.DataAccess.Context;
 using TKDequipShop.Domains.Models.Auth;
-using TKDequipShop.BusinessLogic.Interfaces;
+
 
 namespace TKDequipShop.API.Controllers
 {
@@ -33,6 +36,27 @@ namespace TKDequipShop.API.Controllers
             var token = _authActions.RegisterAction(_register);
             if (token == null) return BadRequest("User already exists");
             return Ok(new { token });
+        }
+        [HttpGet("me")]
+        [Authorize]
+        public IActionResult GetCurrentUser()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(userIdClaim, out int userId))
+                return Unauthorized();
+
+            var user = _authActions.GetUserByIdAction(userId);
+            if (user == null) return NotFound();
+
+            return Ok(new
+            {
+                id = user.Id,
+                userName = user.UserName,
+                email = user.Email,
+                role = user.Role.ToString(),
+                isActive = user.IsActive,
+                createdAt = user.CreatedAt
+            });
         }
     }
 }

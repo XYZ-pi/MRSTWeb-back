@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TKDequipShop.BusinessLogic.Core;
 using TKDequipShop.BusinessLogic.Interfaces;
+using TKDequipShop.Domains.Entities.User;
 using TKDequipShop.Domains.Models.Auth;
 
 namespace TKDequipShop.BusinessLogic.Functions
@@ -25,6 +26,10 @@ namespace TKDequipShop.BusinessLogic.Functions
             var user = ExecuteRegisterAction(_register);
             if (user == null) return null;
             return _tokenService.GenerateToken(user);
+        }
+        public UserData GetUserByIdAction(int _userId)
+        {
+            return ExecuteGetUserByIdAction(_userId);
         }
     }
 }
