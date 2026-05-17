@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TKDequipShop.BusinessLogic.Core;
+﻿using TKDequipShop.BusinessLogic.Core;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Models.Cart;
 using TKDequipShop.Domains.Entities.Cart;
@@ -29,19 +24,27 @@ namespace TKDequipShop.BusinessLogic.Functions
             return cartDto;
         }
 
-        public CartResponseDto PostItemToCartAction(int _userId, CartItemData _item)
+        public CartResponseDto PostItemToCartAction(int _userId, CartItemDto _item)
         {
-            var item = ExecutePostItemToCartAction(_userId, _item);
-            if (item == null) return null;
+            var cartItem = new CartItemData
+            {
+                ProductId = _item.ProductId,
+                Quantity = _item.Quantity,
+                UnitPrice = _item.UnitPrice,
+                TotalPrice = _item.Quantity * _item.UnitPrice
+            };
+
+            var saved = ExecutePostItemToCartAction(_userId, cartItem);
+            if (saved == null) return null;
+
             var cart = ExecuteGetCartByUserIdAction(_userId);
-            CartResponseDto cartDto = new CartResponseDto()
+            return new CartResponseDto
             {
                 Id = cart.Id,
                 UserId = cart.UserId,
                 Items = cart.Items,
                 Status = cart.Status,
             };
-            return cartDto;
         }
 
         public CartResponseDto DeleteCartItemAction(int _userId, int _itemId)

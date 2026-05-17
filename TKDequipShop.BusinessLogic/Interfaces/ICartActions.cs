@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TKDequipShop.Domains.Entities.Cart;
+﻿using TKDequipShop.Domains.Entities.Cart;
 using TKDequipShop.Domains.Models.Cart;
 
 namespace TKDequipShop.BusinessLogic.Interfaces
@@ -12,7 +7,7 @@ namespace TKDequipShop.BusinessLogic.Interfaces
     {
         public CartResponseDto GetCartByUserIdAction(int _userId);
 
-        public CartResponseDto PostItemToCartAction(int _userId, CartItemData _item);
+        public CartResponseDto PostItemToCartAction(int _userId, CartItemDto _item);
 
         public CartResponseDto DeleteCartItemAction(int _userId, int _itemId);
 

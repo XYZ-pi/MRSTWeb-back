@@ -1,4 +1,5 @@
-﻿using TKDequipShop.DataAccess.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using TKDequipShop.DataAccess.Context;
 using TKDequipShop.Domains.Entities.Cart;
 
 namespace TKDequipShop.BusinessLogic.Core
@@ -9,7 +10,10 @@ namespace TKDequipShop.BusinessLogic.Core
         {
             using (var db = new AppDbContext())
             {
-                return db.CartDatas.FirstOrDefault(c => c.UserId == _userId);
+                return db.CartDatas
+                            .Include(c => c.Items)
+                                .ThenInclude(i => i.Product)
+                            .FirstOrDefault(c => c.UserId == _userId);
             }
         }
 

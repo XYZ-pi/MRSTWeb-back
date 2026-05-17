@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TKDequipShop.API.Attributes;
 using TKDequipShop.BusinessLogic.Interfaces;
 using TKDequipShop.Domains.Entities.Cart;
+using TKDequipShop.Domains.Models.Cart;
 
 namespace TKDequipShop.API.Controllers
 {
@@ -28,7 +29,7 @@ namespace TKDequipShop.API.Controllers
         }
 
         [HttpPost("{_userId}/items")]
-        public IActionResult PostItemToCart(int _userId, [FromBody]CartItemData _item)
+        public IActionResult PostItemToCart(int _userId, [FromBody]CartItemDto _item)
         {
             var _cart = _cartActions.PostItemToCartAction(_userId, _item);
             if (_cart == null) return BadRequest();
